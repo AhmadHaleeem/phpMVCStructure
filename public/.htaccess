@@ -1,0 +1,7 @@
+RewriteEngine on
+#!-f => File
+#!-d => Directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Transfer whatever you get to index.php
+RewriteRule ^(.*)$ /index.php
