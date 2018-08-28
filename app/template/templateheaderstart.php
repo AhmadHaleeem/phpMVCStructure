@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Panel</title>
+    <title><?= isset($title) ?  $title : 'default' ?></title>
 
 
 

@@ -2,6 +2,7 @@
 namespace PHPMVC;
 
 use PHPMVC\LIB\FrontController;
+use PHPMVC\LIB\Language;
 use PHPMVC\LIB\Template;
 
 if (!defined('DS')) {
@@ -10,13 +11,20 @@ if (!defined('DS')) {
 
 require_once '..' . DS . 'app' . DS . 'config' . DS . 'config.php';
 require_once APP_PATH . DS . 'lib' . DS . 'autoload.php';
+
 $template_parts = require_once '..' . DS . 'app' . DS . 'config' . DS . 'templateconfig.php';
 
 session_start();
 
-$template = new Template($template_parts);
+if (!isset($_SESSION['lang'])) {
+    $_SESSION['lang'] = APP_DEFAULT_LANGUAGE;
+}
 
-$frontController = new FrontController($template);
+
+$template = new Template($template_parts);
+$language = new Language();
+
+$frontController = new FrontController($template, $language);
 $frontController->displatch();
 ?>
 

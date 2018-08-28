@@ -13,6 +13,8 @@ class EmployeeController extends AbstractController
 
     public function defaultAction()
     {
+        $this->_language->load('template.common');
+        $this->_language->load('employee.default');
         $this->_data['employees'] = EmployeeModel::getAll();
         return $this->_view();
     }
@@ -29,7 +31,7 @@ class EmployeeController extends AbstractController
             $emp->tax = $this->filterFloat($_POST['tax']);
 
             if ($emp->save()) {
-                $_SESSION['message'] = 'Employee, saved successfully';
+                $_SESSION['message'] = 'تم حفظ الموظف بنجاح';
                 $this->redirect('/employee');
             }
         }
@@ -46,6 +48,7 @@ class EmployeeController extends AbstractController
         }
 
         $this->_data['employee'] = $emp;
+        $this->_language->load('template.common');
 
         if (isset($_POST['submit'])) {
             $emp = new EmployeeModel();
@@ -57,7 +60,7 @@ class EmployeeController extends AbstractController
             $emp->tax = $this->filterFloat($_POST['tax']);
 
             if ($emp->save()) {
-                $_SESSION['message'] = 'Employee, updated successfully';
+                $_SESSION['message'] = 'تم تعديل الموظف بنجاح';
                 $this->redirect('/employee');
             }
         }
@@ -68,13 +71,15 @@ class EmployeeController extends AbstractController
     {
         $id = $this->filterInt($this->_params[0]);
 
+        $this->_language->load('template.common');
+
         $emp = EmployeeModel::getByPK($id);
         if ($emp === false) {
             $this->redirect('/employee');
         }
 
         if ($emp->delete()) {
-            $_SESSION['message'] = 'Employee, deleted successfully';
+            $_SESSION['message'] = 'تم حذف الموظف بنجاح';
             $this->redirect('/employee');
         }
     }

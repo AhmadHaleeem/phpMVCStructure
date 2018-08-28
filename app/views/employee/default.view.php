@@ -85,15 +85,16 @@
             unset($_SESSION['message']);
         }
     ?>
-    <a class="add_new_emp" href="/employee/add">Add new employee</a>
+    <a class="add_new_emp" href="/employee/add"><?= $text_add_employee ?></a>
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Tax (%)</th>
-            <th>Control</th>
+            <th><?= $text_table_employee_name ?></th>
+            <th><?= $text_table_employee_age ?></th>
+            <th><?= $text_table_employee_address ?></th>
+            <th><?= $text_table_employee_tax ?> (%)</th>
+            <th><?= $text_table_employee_salary ?></th>
+            <th><?= $text_table_employee_control ?></th>
         </tr>
         </thead>
 
@@ -106,12 +107,13 @@
                     <td><?= $employee->age ?></td>
                     <td><?= $employee->address ?></td>
                     <td><?= $employee->tax ?></td>
+                    <td><?= $employee->salary ?></td>
                     <td>
                         <a href="/employee/edit/<?= $employee->id ?>"><i
                                     style="color: #343222"
                                     class="far fa-edit fa-1x"></a></i>
                         <a href="/employee/delete/<?= $employee->id ?>"
-                           onclick="if(!confirm('Do you want to delete this confirm')) return false;"><i
+                           onclick="if(!confirm('<?= $text_delete_confirm ?>')) return false;"><i
                                     style="color: #990000"
                                     class="fas fa-trash-alt fa-1x"></i></a></i>
                     </td>
